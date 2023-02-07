@@ -1,0 +1,21 @@
+package com.mysite.sbb;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter		// LomBok 라이브러리
+@Setter		// LomBok 라이브러리
+@Entity		// JPA에서 자바 객체를 DB의 테이블에 매핑
+public class Answer {
+	private Integer id;		//Primary Key, 자동 증가됨.(1,1)
+	
+	private String content;
+	
+	private LocalDateTime createDate;
+	
+	private Question question;		// 중요!! question 컬럼 
+								// 부모 테이블이 Question 테이블의 Primary Key를 참조 (id)
+}

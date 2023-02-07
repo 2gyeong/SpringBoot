@@ -1,0 +1,15 @@
+package com.mysite.sbb;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class HelloController {
+
+	
+	public String hello() {		// 리턴 : String
+		
+		retrun "Hello World";
+		
+	}
+	
+}

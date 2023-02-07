@@ -1,0 +1,16 @@
+package com.mysite.sbb;
+
+public class HelloLombok {
+	
+	// 필드
+	private String hello;
+	private int lombok;
+	
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

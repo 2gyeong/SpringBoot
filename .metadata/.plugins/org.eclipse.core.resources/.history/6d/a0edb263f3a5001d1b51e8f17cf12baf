@@ -1,0 +1,26 @@
+package com.mysite.sbb;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor		// 기본 생성자
+@AllArgsConstructor
+public class HelloLombok3 {
+
+	private String hello;
+	private int lombok;
+	
+	// public HelloLombok3(){}  <== 기본 생성자
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

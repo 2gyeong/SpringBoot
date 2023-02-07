@@ -1,0 +1,45 @@
+package com.mysite.sbb;
+import java.sql.Date;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+public class HelloLombok2 {
+	
+	private int seq;
+	private String title;
+	private String writer;
+	private String content;
+	private String regdate;
+	private int cnt;
+
+
+	public static void main(String[] args) {
+		// 객체 생성 후 테스트
+		
+		HelloLombok2 lombok = new HelloLombok2();
+		
+		lombok.setSeq(20);
+		lombok.setTitle("제목입니다.");
+		lombok.setWriter("작성자");
+		lombok.setContent("내용입니다.");
+		lombok.setRegdate("22/02/06");
+		lombok.setCnt(1);
+		
+		System.out.println(lombok.getSeq());
+		System.out.println(lombok.getTitle());
+		System.out.println(lombok.getWriter());
+		System.out.println(lombok.getContent());
+		System.out.println(lombok.getRegdate());
+		System.out.println(lombok.getCnt());
+		
+		System.out.println(lombok.toString());
+		
+	}
+
+}

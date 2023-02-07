@@ -1,0 +1,14 @@
+package com.mysite.sbb;
+
+
+public class HelloLombok4 {
+
+	private String hello;
+	private int lombok;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,20 @@
+package com.mysite.sbb2;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
+public class HelloLombok3 {
+	
+	private final String name;
+	private int age;
+
+	public static void main(String[] args) {
+		
+		HelloLombok3 hl3 = new HelloLombok3("김이경", 28);
+		
+
+	}
+
+}

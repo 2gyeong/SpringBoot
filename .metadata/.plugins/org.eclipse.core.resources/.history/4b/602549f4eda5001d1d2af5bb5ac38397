@@ -1,0 +1,20 @@
+package com.mysite.sbb;
+
+import java.sql.Date;
+
+public class HelloLombok2 {
+	
+	private int seq;
+	private String title;
+	private String writer;
+	private String content;
+	private Date regdate;
+	private int cnt;
+
+
+	public static void main(String[] args) {
+		// 객체 생성 후 테스트
+
+	}
+
+}

@@ -1,0 +1,26 @@
+package com.mysite.sbb;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@RequiredArgsConstructor
+public class HelloLombok4 {
+
+	private String hello;
+	private int lombok;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

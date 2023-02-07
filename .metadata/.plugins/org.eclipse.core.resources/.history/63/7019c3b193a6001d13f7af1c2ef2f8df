@@ -1,0 +1,21 @@
+package com.mysite.sbb;
+
+import java.time.LocalDateTime;		// 자신의 시스템의 local 시간
+
+import jakarta.persistence.Entity;		// JPA 에서 적용된 어노테이션
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity		// 자바 클래스를 DB의 테이블과 매핑된 클래스		: 테이블명 : question
+public class Question {		
+	
+	@Id		// persistence : JPA에서 사용된 어노테이션
+	private Integer id;		// Primary Key, 시퀀스(1, 1)
+	private String subject;
+	private String content;
+	private LocalDateTime createDate;
+	
+}

@@ -1,0 +1,16 @@
+package com.mysite.sbb2;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class HelloLombok1 {
+
+	private String name ;
+	private int age ;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

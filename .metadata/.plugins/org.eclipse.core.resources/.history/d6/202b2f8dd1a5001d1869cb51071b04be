@@ -1,0 +1,7 @@
+
+# 가종 설정을 셋팅하는 파일
+# JDBC 셋팅, Mybatis Mapper
+# 주석	: netstat -na|more
+
+# 기본 포트 : 8080
+server.port = 9292

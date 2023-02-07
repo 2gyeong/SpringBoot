@@ -1,0 +1,26 @@
+package com.mysite.sbb;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+//@NoArgsConstructor
+@RequiredArgsConstructor		// 생성자 생성 시 필드 이름 앞에 final이 들어가 있는 필드만 arguments로 생성
+public class HelloLombok4 {
+
+	private String hello;
+	private int lombok;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
