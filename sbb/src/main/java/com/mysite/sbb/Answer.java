@@ -23,7 +23,8 @@ public class Answer {
 	private String content;
 	
 	private LocalDateTime createDate;
-	
+					
+					// 중요 !!
 	@ManyToOne		// Foreign Key	: 부모테이블의 PK, UK컬럼의 값을 참조해서 값을 할당.
 	private Question question;		// 중요!! question 컬럼 
 								// 부모 테이블이 Question 테이블의 Primary Key를 참조 (id)
