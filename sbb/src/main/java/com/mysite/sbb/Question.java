@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.CascadeType;
 
+import com.mysite.sbb.answer.Answer;
+
 import jakarta.persistence.Column;
 //persistence : JPA에서 사용된 어노테이션
 import jakarta.persistence.Entity;		// JPA 에서 적용된 어노테이션
@@ -39,7 +41,7 @@ public class Question {
 	*/
 	
 	// Question 테이블에서 Answer테이블을 참조하는 컬럼을 생성 @OnetoMany
-	
+	// 하나의 질문에 있는 여러 개의 답변을 리스트를 저장. 하나의 질문에 대해 여러 개의 답변을 gettering 해서 가져온다.(연결)  
 	@OneToMany (mappedBy = "question", cascade = jakarta.persistence.CascadeType.REMOVE )
 	private List<Answer> answerList;
 	
