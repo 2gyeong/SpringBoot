@@ -1,17 +1,20 @@
 package com.mysite.sbb;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.bytecode.spi.ReflectionOptimizer.AccessOptimizer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
-
-import jakarta.transaction.Transactional;
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
 
 @SpringBootTest
 class SbbApplicationTests {
@@ -20,13 +23,56 @@ class SbbApplicationTests {
 	private QuestionRepository questionRepository;
 	
 	@Autowired	// 객체 자동 주입 (DI) , JPA의 메소드를 사용, findAll(), findId(), save(), delete()
-	private AnswerRepository answerRopository;
+	private AnswerRepository answerRepository;
 	
-	/* 하나의 질문에 여러 개의 답변 찾기 */
+/* Answer 테이블에 더미 데이터 입력 */ 
+	
+	@Test 
+	public void insertAnswer() {
+		Question q = new Question(); 
+		Answer a = new Answer(); 
+		
+		//Question 객체 질문에대한 값을 가지고 와서 answer question필드에 넣어준다. 
+		Optional<Question> op = 
+				this.questionRepository.findById(2);
+		q = op.get(); 
+		
+		
+		a.setContent("1 글에대한 답변 입니다. - 2" );
+		a.setCreateDate(LocalDateTime.now());
+		a.setQuestion(q);
+		
+		this.answerRepository.save(a); 
+	}
+	
+	 
+	
+	/* question 테이블에 for 문을 사용해서 더미값 1000개 insert
+	
+	@Test
+	public void insert1000() {
+		Question q = null;
+		
+		// for문 사용해서 레코드 1000개 insert
+		for(int i = 1; i <=1000; i++) {
+			q = new Question();
+			q.setSubject("제목 - " + i);
+			q.setContent("내용 - " + i);
+			q.setCreateDate(LocalDateTime.now());
+			
+			this.questionRepository.save(q);
+		}
+		
+	}
+	
+	 */
+	
+	/* 하나의 질문에 여러 개의 답변 찾기 
 	@Transactional	// 아래의 메소드가 하나의 트랜잭션으로 작동 되도록 설정 / JUnit test 시 오류나기 때문에 사용, 실제 운영환경에서는 문제 X
 	@Test
 	public void testjpa8() {
-		// 1. Question 테이블에서 질문의 레코드를 얻어온다. 끄집어 낸다.
+		
+	// 1. Question 테이블에서 질문의 레코드를 얻어온다. 끄집어 낸다.
 		Optional <Question> op =
 			this.questionRepository.findById(1);
 		
@@ -61,7 +107,7 @@ class SbbApplicationTests {
 
 	}
 	
-	
+	*/
 	/* 답변 레코드 하나 가져오기 
 	@Test
 	public void testjpa7() {

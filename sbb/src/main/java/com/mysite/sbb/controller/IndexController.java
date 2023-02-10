@@ -5,10 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class indexController {
-
-	@GetMapping("/")		// http://localhost:9292
+public class IndexController {
+	
+	@GetMapping("/index")		//http://localhost:9292
 	public String index() {
-		 return "index";
+		
+		return "index"; 
 	}
+
 }

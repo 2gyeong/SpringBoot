@@ -1,6 +1,5 @@
 package com.mysite.sbb;
 
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

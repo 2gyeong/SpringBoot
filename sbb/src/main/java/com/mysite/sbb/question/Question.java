@@ -1,4 +1,4 @@
-package com.mysite.sbb;
+package com.mysite.sbb.question;
 
 import java.time.LocalDateTime;		// 자신의 시스템의 local 시간
 import java.util.List;

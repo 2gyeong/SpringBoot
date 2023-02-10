@@ -1,6 +1,5 @@
 package com.mysite.sbb;
 import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 
 import lombok.Getter;
