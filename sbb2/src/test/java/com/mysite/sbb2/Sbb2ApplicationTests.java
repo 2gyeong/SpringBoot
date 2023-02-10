@@ -17,7 +17,7 @@ class Sbb2ApplicationTests {
 	@Autowired		// 객체 자동 주입 (DI)
 	private UsersRepository usersRepository;
 
-	/* 
+	
 	// 1. insert 값 5개
 	@Test
 	void insertUsers() {
@@ -27,7 +27,7 @@ class Sbb2ApplicationTests {
 		u1.setEmail("aaa@aaa.com");
 		u1.setName("신짱구");
 		u1.setPass("1234");	
-		u1.setRegdate(LocalDateTime.now());
+		u1.setRegDate(LocalDateTime.now());
 		this.usersRepository.save(u1);
 		
 		
@@ -36,7 +36,7 @@ class Sbb2ApplicationTests {
 		u2.setEmail("bbb@aaa.com");
 		u2.setName("신짱아");
 		u2.setPass("1234");
-		u2.setRegdate(LocalDateTime.now());
+		u2.setRegDate(LocalDateTime.now());
 		this.usersRepository.save(u2);
 		
 		Users u3 = new Users();
@@ -44,7 +44,7 @@ class Sbb2ApplicationTests {
 		u3.setEmail("ccc@aaa.com");
 		u3.setName("봉미선");
 		u3.setPass("1234");
-		u3.setRegdate(LocalDateTime.now());
+		u3.setRegDate(LocalDateTime.now());
 		this.usersRepository.save(u3);
 		
 		Users u4 = new Users();
@@ -52,7 +52,7 @@ class Sbb2ApplicationTests {
 		u4.setEmail("ddd@aaa.com");
 		u4.setName("신형만");
 		u4.setPass("1234");
-		u4.setRegdate(LocalDateTime.now());
+		u4.setRegDate(LocalDateTime.now());
 		this.usersRepository.save(u4);
 		
 		Users u5 = new Users();
@@ -60,16 +60,14 @@ class Sbb2ApplicationTests {
 		u5.setEmail("eee@aaa.com");
 		u5.setName("흰둥이");
 		u5.setPass("1234");
-		u5.setRegdate(LocalDateTime.now());
+		u5.setRegDate(LocalDateTime.now());
 		this.usersRepository.save(u5);
 		
 		
 	}
 	
-	*/
 	
-	/**/
-	// 2. regdate 컬럼을 기준으로 내림차순(Desc) 정렬
+	// 2. RegDate 컬럼을 기준으로 내림차순(Desc) 정렬
 	
 	@Test	
 	public void List() {
@@ -91,9 +89,8 @@ class Sbb2ApplicationTests {
 		
 	
 		}
-		
-		
-	/*		
+			
+
 
 	// 3. idx 3번의 name과 email 주소를 수정
 	@Test
@@ -115,5 +112,5 @@ class Sbb2ApplicationTests {
 		this.usersRepository.delete(u7);
 		
 	}
-*/
+
 }
