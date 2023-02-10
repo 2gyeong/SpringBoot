@@ -1,4 +1,4 @@
-package com.mysite.sbb2;
+package com.mysite.sbb2.users;
 
 import java.time.LocalDateTime;
 
@@ -28,7 +28,7 @@ public class Users {
 	@Column(length =100)
 	private String email;
 	
-	private LocalDateTime regdate;
+	private LocalDateTime regDate;	// REG_DATE
 	
 	private Integer cnt;
 	

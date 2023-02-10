@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.bytecode.spi.ReflectionOptimizer.AccessOptimizer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.mysite.sbb2.users.Users;
+import com.mysite.sbb2.users.UsersRepository;
 
 @SpringBootTest
 class Sbb2ApplicationTests {
@@ -15,10 +17,10 @@ class Sbb2ApplicationTests {
 	@Autowired		// 객체 자동 주입 (DI)
 	private UsersRepository usersRepository;
 
-	/*
+	/* 
 	// 1. insert 값 5개
 	@Test
-	void contextLoads() {
+	void insertUsers() {
 		
 		Users u1 = new Users();
 		u1.setCnt(0);
@@ -63,38 +65,38 @@ class Sbb2ApplicationTests {
 		
 		
 	}
-
 	
 	*/
 	
-	
+	/**/
 	// 2. regdate 컬럼을 기준으로 내림차순(Desc) 정렬
 	
 	@Test	
-	public void test1() {
-		List<Users> ob =
-		this.usersRepository.findAllByOrderByRegDateDesc();
+	public void List() {
+		List<Users> all =
+				this.usersRepository.findAllByOrderByRegDateDesc();
 		
-		System.out.println(ob.size());
+		System.out.println("총 개수 :" + all.size());
 		
-		for(int i = 0; i < ob.size(); i++) {
-			Users u = ob.get(i);
+		for(Users u : all) {
 			
 			System.out.println(u.getIdx());
 			System.out.println(u.getName());
 			System.out.println(u.getPass());
 			System.out.println(u.getEmail());
-			System.out.println(u.getRegdate());
+			System.out.println(u.getRegDate());
 			System.out.println(u.getCnt());
 			System.out.println("====================");
 		}
+		
 	
 		}
 		
-			
+		
+	/*		
 
 	// 3. idx 3번의 name과 email 주소를 수정
-	
+	@Test
 	public void test2() {
 		Optional<Users> update = this.usersRepository.findById(3);
 		
@@ -106,11 +108,12 @@ class Sbb2ApplicationTests {
 	}
 	
 	// idx 4번의 값을 삭제
+	@Test
 	public void test3() {
 		Optional<Users> dt = this.usersRepository.findById(4);
 		Users u7 = dt.get();
 		this.usersRepository.delete(u7);
 		
 	}
-
+*/
 }
