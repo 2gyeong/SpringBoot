@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.mysite.sbb2.DataNotFoundException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -27,14 +30,25 @@ public class UsersController {
 	}
 	
 	// 상세 페이지
-	@GetMapping(value = "/users/detail/{idx}")
-	public String detail (Model model, @PathVariable("idx") Integer idx) {
+	@GetMapping(value = "/users_detail/{idx}")
+	public String detail (Model model, @PathVariable("idx") Integer idx) throws DataNotFoundException {
 		
 		Users u = this.usersService.getUsers(idx);
 		
 		model.addAttribute("users", u);
 		
 		return "users_detail";
+	}
+	
+	@GetMapping("/user_insert")
+	public String insert () {
+		return "user_insert";
+	}
+	
+	@PostMapping("/insert_save")
+	public String insertSave(@RequestParam String name, @RequestParam String pass, @RequestParam String email) {
+		this.usersService.insertSave(name, pass, email);
+		return "redirect:/users/list";
 	}
 	
 }

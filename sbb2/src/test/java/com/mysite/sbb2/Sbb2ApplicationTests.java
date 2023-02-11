@@ -16,8 +16,24 @@ class Sbb2ApplicationTests {
 	
 	@Autowired		// 객체 자동 주입 (DI)
 	private UsersRepository usersRepository;
-
 	
+	@Test
+	public void insert1000() {
+		Users u = null;
+		
+		for(int i = 1; i <=1000 ; i++) {
+			u = new Users();
+			u.setName("김이경 - " + i );
+			u.setPass("pass1");
+			u.setEmail("yyy@yyy.com - "+ i);
+			u.setRegDate(LocalDateTime.now());
+			u.setCnt(i);
+			
+			this.usersRepository.save(u);
+		}
+	}
+
+	/*
 	// 1. insert 값 5개
 	@Test
 	void insertUsers() {
@@ -112,5 +128,7 @@ class Sbb2ApplicationTests {
 		this.usersRepository.delete(u7);
 		
 	}
+	
+	*/
 
 }

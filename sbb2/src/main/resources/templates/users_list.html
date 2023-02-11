@@ -8,6 +8,10 @@
 <center>
 	<h2> Users 리스트입니다. (View Page)</h2>
 	<hr>
+	<a href="/user_insert">회원 등록 </a>
+
+	
+	<hr>
 	<table>
 		<tr align="center">
 			<td width="50">번호</td>
@@ -18,9 +22,9 @@
 			<td width="80">방문수</td>
 		</tr>
 		
-		<tr th:each="users : ${usersList}" align="center">
+		<tr align="center" th:each="users : ${usersList}">
 			<td>[[${users.idx}]]</td>
-			<td>[[${users.name}]]</td>
+			<td><a th:href="@{|/users_detail/${users.idx}|}">[[${users.name}]]</a></td>
 			<td>[[${users.pass}]]</td>
 			<td>[[${users.email}]]</td>
 			<td>[[${users.regDate}]]</td>
@@ -31,5 +35,9 @@
 	
 	</table>
 	</center>
+	
+	
+	
+	
 </body>
 </html>

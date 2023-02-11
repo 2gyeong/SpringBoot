@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Users 상세 페이지</title>
+</head>
+<body>
+	<h1 th:text = "${users.name}">이름</h1>
+	
+	
+	<table border="1">
+	<tr><td width="150">비밀번호</td><td th:text = "${users.pass}"></td></tr>
+	<tr><td>이메일</td><td th:text = "${users.email}"></td></tr>
+	<tr><td>회원가입일</td><td th:text ="${users.regDate}"></td></tr>
+	<tr><td>번호</td><td th:text="${users.cnt}"></td></tr>
+	
+	
+	</table>
+	
+</body>
+</html>
