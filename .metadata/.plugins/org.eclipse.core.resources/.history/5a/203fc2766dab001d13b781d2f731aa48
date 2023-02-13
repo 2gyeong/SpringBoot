@@ -1,0 +1,12 @@
+package com.mysite.sbb.question;
+
+public class QuestionForm {
+	
+	// subject 폼의 값과 content 폼의 값의 유효성 체크
+	
+	private String subject;
+	
+	private String content;
+	
+	
+}

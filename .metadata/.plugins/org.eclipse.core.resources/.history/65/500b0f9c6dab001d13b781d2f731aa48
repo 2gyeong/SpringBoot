@@ -1,0 +1,17 @@
+package com.mysite.sbb.question;
+
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
+public class QuestionForm {
+	
+	// subject 폼의 값과 content 폼의 값의 유효성 체크
+	
+	@NotEmpty(message="제목은 필수 사항입니다.") // subject 값이 비어있을 때 작동
+	@Size(max=200)					// subject 값을 최대 200자 까지 
+	private String subject;
+	
+	private String content;
+	
+	
+}

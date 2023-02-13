@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;bootstrap.min.css&apos; to &apos;static&apos;&#x0D;&#x0A;- Original project: &apos;sbb2&apos;&#x0D;&#x0A;- Destination element: &apos;static&apos;&#x0D;&#x0A;- Original element: &apos;bootstrap.min.css&apos;" description="Copy file" element1="src/main/resources/static/bootstrap.min.css" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1676256845370" target="/sbb/src/main/resources/static" units="0" version="1.0"/>
+</session>

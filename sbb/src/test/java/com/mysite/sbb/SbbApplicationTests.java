@@ -26,7 +26,7 @@ class SbbApplicationTests {
 	private AnswerRepository answerRepository;
 	
 /* Answer 테이블에 더미 데이터 입력 */ 
-	
+	/*
 	@Test 
 	public void insertAnswer() {
 		Question q = new Question(); 
@@ -44,10 +44,10 @@ class SbbApplicationTests {
 		
 		this.answerRepository.save(a); 
 	}
-	
+	*/
 	 
 	
-	/* question 테이블에 for 문을 사용해서 더미값 1000개 insert
+	// question 테이블에 for 문을 사용해서 더미값 1000개 insert
 	
 	@Test
 	public void insert1000() {
@@ -65,7 +65,7 @@ class SbbApplicationTests {
 		
 	}
 	
-	 */
+	 /* */
 	
 	/* 하나의 질문에 여러 개의 답변 찾기 
 	@Transactional	// 아래의 메소드가 하나의 트랜잭션으로 작동 되도록 설정 / JUnit test 시 오류나기 때문에 사용, 실제 운영환경에서는 문제 X
