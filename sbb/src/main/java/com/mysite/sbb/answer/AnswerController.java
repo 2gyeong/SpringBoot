@@ -39,7 +39,7 @@ public class AnswerController {
 				
 				// content의 값이 비어있을 때
 				if(bindingResult.hasErrors()) {
-					model.addAttribute("question", bindingResult);
+					model.addAttribute("question", question);
 					return "question_detail";
 				}
 		

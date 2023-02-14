@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class IndexController {
 	
-	@GetMapping("/index")		//http://localhost:9292
+	@GetMapping("/")		//http://localhost:9292
 	public String index() {
 		
-		return "index"; 
+		return "redirect:/question/list"; 
 	}
 
 }

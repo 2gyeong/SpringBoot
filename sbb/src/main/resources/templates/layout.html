@@ -11,9 +11,16 @@
 </head>
 <body>
 
-<!--  기본 템플릿에 삽입될 내용 - start -->
+<!-- 최상단의 네비게이션 바 (Nav Bar) -->
+<!--  외부의 navbar.html import -->
+<nav th:replace="~{navbar::navbarFragment}"></nav>
+
+	<!--  기본 템플릿에 삽입될 내용 - start -->
 <th:block layout:fragment="content"> </th:block>
 <!--  기본 템플릿에 삽입될 내용 - END -->
+
+<!--  부트스트랩 자바 스크립트 import -->
+<script th:src="@{/bootstrap.min.js}"></script>
 
 </body>
 </html>
