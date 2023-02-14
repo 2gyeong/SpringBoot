@@ -18,31 +18,17 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class UsersController {
 	
+	private final UsersRepository usersRepository;
 	public final UsersService usersService;
 	
-	/*
+
 	@GetMapping("/users/list")
-	@PostMapping("/users/list")
-	public String list (Model model) {
-			List<Users> usersList = this.usersService.getList();
-			
-			model.addAttribute("usersList", usersList);
-	
-	 return "users_list";
+	public String usersList(Model model,
+			@RequestParam(value="page", defaultValue = "0") int page) {
+		Page<Users> usersList = this.usersService.getList(page);
+		model.addAttribute("usersList", usersList);
+		return "users_list";
 	}
-	*/
-	
-	public String list (Model model, @RequestParam(value="page", defaultValue = "0") int page) {
-		Page<Users> paging = 
-				this.usersService.getList(page); 
-			
-			//model 객체에 결과로 받은 paging 객체를 client 로 전송 
-			model.addAttribute("paging", paging); 
-			
-			return "users_list"; 
-		
-	}
-	
 	
 	// 상세 페이지
 	@GetMapping(value = "/users_detail/{idx}")
@@ -52,14 +38,16 @@ public class UsersController {
 		
 		model.addAttribute("users", u);
 		
-		return "users_detail";
+		return "user_detail";
 	}
 	
+	// insert 
 	@GetMapping("/user_insert")
 	public String insert () {
 		return "user_insert";
 	}
 	
+	// 등록
 	@PostMapping("/insert_save")
 	public String insertSave(@RequestParam String name, @RequestParam String pass, @RequestParam String email) {
 		this.usersService.insertSave(name, pass, email);
