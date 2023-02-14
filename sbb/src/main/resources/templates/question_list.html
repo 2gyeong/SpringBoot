@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type = "text/css" th:href="@{/bootstrap.min.css}">
 
-</head>
-
-	<h1> 질문테이블의 리스트를 출력하는 view 페이지 입니다.</h1>
-	<hr>
-	
 <html layout:decorate="~{layout}">
 	<div layout:fragment="content" class = "container my-3">
 	<table class = "table">
@@ -41,16 +30,20 @@
 	<!-- <tr th:each="question, loop : ${questionList}">  -->
 	
 	<tr th:each="question, loop : ${paging}"> <!-- 2월 14일 페이징 처리 수정 -->
-		<td th:text="${loop.count}"> 번호 </td>
+	
+			<!--  <td th:text="${loop.count}"> 번호 </td> -->
+			<!-- 
+				번호 = 전체 게시물 수 - (현재페이지*페이징당 게시물 수 ) - 나열 인덱스
+			 -->
+	<td th:text="${paging.getTotalElements - (paging.number*paging.size)-loop.index}"> 번호 </td>
 		<td> <a th:href="@{|/question/detail/${question.id}|}">[[${question.subject}]] </a></td>
-			
 		<td> [[ ${#temporals.format(question.createDate, 'yyyy-mm-dd HH:mm')}]] </td>	
 	</tr>
 		
 		</tbody>
 	</table>
-<!--  페이징 처리 시작 -->
-	<div th:if="${!paging.isEmpty()}">
+	<!--  페이징 처리 시작 -->
+<div th:if="${!paging.isEmpty()}">
 		<ul class="pagination justify-content-center">
 			<!-- 이전페이지가 존재하지 않으면 이전에 링크를 비활성화 -->
 			<li class="page-item" th:classappend="${!paging.hasPrevious}? 'disabled'">
@@ -61,25 +54,19 @@
 				
 			</li>
 			
-			<!-- 첫페이지 부터 마지막 페이지까지 루프를 돌려서 출력 -->
-			<li th:each="page : ${#numbers.sequence(0,paging.totalPages-1)}"
+			<!-- 첫 페이지 부터 마지막 페이지까지 루프를 돌려서 출력 -->
+			<li th:each="page : ${#numbers.sequence(0, paging.totalPages-1)}"
+				th:if="${page >= paging.number-5 and page <= paging.number+5}" 
 				th:classappend="${page==paging.number} ? 'active'" class="page-item"
 			>
-				<!-- each로 계속 반복해서 돌아감 -->
-				<a th:text=${page} class="page-link" th:href="@{|?page=${page}|}">
-				
-				</a>
+				<a th:text=${page} class="page-link" th:href="@{|?page=${page}|}"></a>
 			</li>
-			
 			
 			<!-- 다음을 처리하는 블락 -->
-			<li class="page-item" th:classappend="${!paging.hasNext}? 'disabled'">
-				<a class="page-link" th:href="@{|?page=${paging.number+1}|}">
-					다음
-				</a>
+			<li class="page-item" th:classappend="${!paging.hasNext}? 'disable'">
+				<a class="page-link" th:href="@{|?page=${paging.number+1}|}">다음</a>
 			</li>
-			
-		</ul>	
+		</ul>
 	</div>
 	<!--  페이징 처리 끝 -->
 	<!--  새글 등록 버튼 -->

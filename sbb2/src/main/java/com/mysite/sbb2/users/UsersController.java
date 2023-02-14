@@ -2,6 +2,7 @@ package com.mysite.sbb2.users;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class UsersController {
 	
 	public final UsersService usersService;
 	
+	/*
 	@GetMapping("/users/list")
 	@PostMapping("/users/list")
 	public String list (Model model) {
@@ -28,6 +30,19 @@ public class UsersController {
 	
 	 return "users_list";
 	}
+	*/
+	
+	public String list (Model model, @RequestParam(value="page", defaultValue = "0") int page) {
+		Page<Users> paging = 
+				this.usersService.getList(page); 
+			
+			//model 객체에 결과로 받은 paging 객체를 client 로 전송 
+			model.addAttribute("paging", paging); 
+			
+			return "users_list"; 
+		
+	}
+	
 	
 	// 상세 페이지
 	@GetMapping(value = "/users_detail/{idx}")

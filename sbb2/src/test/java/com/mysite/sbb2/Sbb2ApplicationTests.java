@@ -17,7 +17,7 @@ class Sbb2ApplicationTests {
 	@Autowired		// 객체 자동 주입 (DI)
 	private UsersRepository usersRepository;
 	
-	/*
+	
 	@Test
 	public void insert1000() {
 		Users u = null;
@@ -33,8 +33,8 @@ class Sbb2ApplicationTests {
 			this.usersRepository.save(u);
 		}
 	}
-*/
-	/**/
+
+	/*
 	// 1. insert 값 5개
 	@Test
 	void insertUsers() {
@@ -82,7 +82,7 @@ class Sbb2ApplicationTests {
 		
 		
 	}
-	
+	*/
 	/*
 	// 2. RegDate 컬럼을 기준으로 내림차순(Desc) 정렬
 	
