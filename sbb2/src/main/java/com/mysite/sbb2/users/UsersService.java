@@ -24,15 +24,15 @@ public class UsersService {
 	
 	
 	// 리스트 - 페이징
-	public Page<Users> getList(int page){
-		List<Sort.Order> sorts = new ArrayList();
+	public Page<Users> getList(int page) {
+		List<Sort.Order> sorts = new ArrayList<>();
 		sorts.add(Sort.Order.desc("regDate"));
 		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 		return this.usersRepository.findAll(pageable);
 	}
 	
 
-		//상세 페이지 처리 메소드
+	//상세 페이지 처리 메소드
 	public Users getUsers(Integer idx) throws DataNotFoundException {
 	
 		Optional<Users> op = this.usersRepository.findById(idx);
@@ -43,6 +43,7 @@ public class UsersService {
 		}
 	}
 	
+	// 등록
 	public void insertSave(String name, String pass, String email) {
 		Users u = new Users();
 		u.setName(name);
