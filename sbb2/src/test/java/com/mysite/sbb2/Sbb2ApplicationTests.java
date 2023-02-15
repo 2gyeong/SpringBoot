@@ -28,7 +28,7 @@ class Sbb2ApplicationTests {
 			u.setPass("pass1");
 			u.setEmail("yyy@yyy.com - "+ i);
 			u.setRegDate(LocalDateTime.now());
-			u.setCnt(i);
+			u.setCnt(0);
 			
 			this.usersRepository.save(u);
 		}

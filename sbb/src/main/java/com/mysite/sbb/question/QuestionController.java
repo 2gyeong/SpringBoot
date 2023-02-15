@@ -85,7 +85,7 @@ public class QuestionController {
 			Question q = 
 					this.questionService.getQuestion(id); 
 			
-			// Model 객체에 담아서 클라이언트에게 전송 
+			// Model 객체에 결과로 받은 paging 객체를 클라이언트로 전송 
 			model.addAttribute("question", q); 
 			
 			return "question_detail";   //template  : question_detail.html

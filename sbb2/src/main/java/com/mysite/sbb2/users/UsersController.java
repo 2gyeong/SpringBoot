@@ -1,10 +1,9 @@
 package com.mysite.sbb2.users;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mysite.sbb2.DataNotFoundException;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -25,8 +25,8 @@ public class UsersController {
 	@GetMapping("/users/list")
 	public String usersList(Model model,
 			@RequestParam(value="page", defaultValue = "0") int page) {
-		Page<Users> usersList = this.usersService.getList(page);
-		model.addAttribute("usersList", usersList);
+		Page<Users> paging = this.usersService.getList(page);
+		model.addAttribute("paging", paging);
 		return "users_list";
 	}
 	
@@ -38,20 +38,26 @@ public class UsersController {
 		
 		model.addAttribute("users", u);
 		
-		return "user_detail";
+		return "users_detail";
 	}
 	
-	// insert 
+	// insert // save
 	@GetMapping("/user_insert")
-	public String insert () {
+	public String userInsert (UserInsert userInsert) {
 		return "user_insert";
 	}
 	
-	// 등록
-	@PostMapping("/insert_save")
-	public String insertSave(@RequestParam String name, @RequestParam String pass, @RequestParam String email) {
-		this.usersService.insertSave(name, pass, email);
+	@PostMapping("/user_insert")
+	public String userInsert (@Valid UserInsert userInsert, BindingResult bindingResult ) {
+		if(bindingResult.hasErrors()) {
+			return "user_insert";
+		}
+		
+		this.usersService.insertSave(userInsert.getName(), userInsert.getPass(), userInsert.getEmail());
+		
 		return "redirect:/users/list";
+		
 	}
+	
 	
 }
