@@ -15,6 +15,7 @@ import com.mysite.sbb.answer.Answer;
 import com.mysite.sbb.answer.AnswerRepository;
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 
 @SpringBootTest
 class SbbApplicationTests {
@@ -24,6 +25,19 @@ class SbbApplicationTests {
 	
 	@Autowired	// 객체 자동 주입 (DI) , JPA의 메소드를 사용, findAll(), findId(), save(), delete()
 	private AnswerRepository answerRepository;
+	
+	
+	@Test
+	void testJpa() {
+		Question q = null;
+		for(int i = 1; i <= 300; i++) {
+			q = new Question();
+			q.setSubject(String.format("테스트 데이터입니다:[%03d]", i));
+			q.setContent("내용입니다.");
+			this.questionRepository.save(q);
+		}
+	}
+	
 	
 /* Answer 테이블에 더미 데이터 입력 */ 
 	/*
@@ -48,7 +62,7 @@ class SbbApplicationTests {
 	 
 	
 	// question 테이블에 for 문을 사용해서 더미값 1000개 insert
-	
+	/*
 	@Test
 	public void insert1000() {
 		Question q = null;
@@ -65,7 +79,8 @@ class SbbApplicationTests {
 		
 	}
 	
-	 /* */
+	*/
+	
 	
 	/* 하나의 질문에 여러 개의 답변 찾기 
 	@Transactional	// 아래의 메소드가 하나의 트랜잭션으로 작동 되도록 설정 / JUnit test 시 오류나기 때문에 사용, 실제 운영환경에서는 문제 X

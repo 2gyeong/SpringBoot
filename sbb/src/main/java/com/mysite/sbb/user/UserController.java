@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -53,5 +54,11 @@ public class UserController {
 			return "signup_form";
 		} 
 		return "redirect:/";
+	}
+	
+	// 로그인
+	@GetMapping("/login")
+	public String login() {
+		return "login_form";
 	}
 }

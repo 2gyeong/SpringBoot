@@ -2,6 +2,9 @@ package com.mysite.sbb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration		//Security 의 설정을 적용하는 어노테이션
 @EnableWebSecurity	// http의 URL 접근을 제어하는 어노테이션
+@EnableMethodSecurity(prePostEnabled = true) // 로그인 여부 판별하기 위한 @PreAuthorize 사용 위해 필요
 public class SecurityConfig {
 	
 	// 모든 URL에서 접근할 수 있도록 풀어줌.
@@ -31,8 +35,16 @@ public class SecurityConfig {
 					new AntPathRequestMatcher("/h2-console/**"))
 		
 			.and().headers().addHeaderWriter(new XFrameOptionsHeaderWriter(
-					XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN));
-		
+					XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
+
+		// 로그인
+			.and().formLogin().loginPage("/user/login").defaultSuccessUrl("/")
+		// 로그아웃
+			.and()
+			.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+			.logoutSuccessUrl("/").invalidateHttpSession(true)
+			;
 				return http.build();
 	}
 	
@@ -40,5 +52,11 @@ public class SecurityConfig {
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+	
+	// 스프링 시큐리티의 인증
+	@Bean
+	AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+		return authenticationConfiguration.getAuthenticationManager();
 	}
 }
