@@ -27,8 +27,12 @@ public class UserSecurityService implements UserDetailsService {
 			throw new UsernameNotFoundException("사용자를 찾을 수 없습니다.");
 		}
 		
+		// 폼에서 넘어오는 username을 DB에서 쿼리해서 siteUser 객체에 담은 값을 Optional에서 뽑아옴
+		// siteUser : DB에서 select 한 레코드
 		SiteUser siteUser = _siteUser.get();
 		
+		// Authentication (인증) : Identity(ID) + Password를 확인 하는 것
+		// Authorization (허가) : 인증된 사용자에게 사이트를 쓸 수 있도록 권한을 부여하는 것
 		List<GrantedAuthority> authorities = new ArrayList();
 		
 		if("admin".equals(username)) {

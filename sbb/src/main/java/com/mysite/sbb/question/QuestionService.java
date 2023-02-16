@@ -60,7 +60,7 @@ public class QuestionService {
 			}
 		}
 		
-	 // 질문 등록 처리 메소드
+	 // 질문 등록 처리 
 		public void create(String subject, String content, SiteUser user) {
 			// Question 객체를 생성 후 Setter 주입
 			Question q = new Question();
@@ -77,7 +77,7 @@ public class QuestionService {
 		public void modify(Question question, String subject, String content) {
 			question.setSubject(subject);
 			question.setContent(content);
-			question.setModifyDayte(LocalDateTime.now());
+			question.setModifyDate(LocalDateTime.now());
 			this.questionRepository.save(question);
 		}
 	

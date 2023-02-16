@@ -54,5 +54,5 @@ public class Question {
 	private SiteUser author;
 	
 	// 수정 일시
-	private LocalDateTime modifyDayte;
+	private LocalDateTime modifyDate;
 }

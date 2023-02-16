@@ -136,7 +136,7 @@ public class QuestionController {
 	    }
 	
 		// 수정 메소드
-		@PreAuthorize("isAuthenticated()")
+		@PreAuthorize("isAuthenticated()")	// 실행하기 전에 권한을 검사하는 어노테이션
 		@PostMapping("/question/modify/{id}")
 		public String questionModify(@Valid QuestionForm questionForm, BindingResult bindingResult,
 				@PathVariable("id") Integer id, Principal principal) {
@@ -156,13 +156,14 @@ public class QuestionController {
 		}
 		
 		// 삭제
+		 @PreAuthorize("isAuthenticated()")		// 실행하기 전에 권한을 검사하는 어노테이션
+		 @GetMapping("/question/delete/{id}")
 		public String questionDelete(Principal principal, @PathVariable("id") Integer id) {
 			Question question = this.questionService.getQuestion(id);
 			if(!question.getAuthor().getUsername().equals(principal.getName())) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없습니다.");
-				
 			}
 			this.questionService.delete(question);
-			return "redirect:/";
+			return "redirect:/question/list";
 		}
 }

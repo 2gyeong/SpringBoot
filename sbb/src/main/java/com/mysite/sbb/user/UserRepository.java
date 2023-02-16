@@ -12,5 +12,7 @@ public interface UserRepository extends JpaRepository<SiteUser, Long> {
 	// save()	<-- Insert, Update
 	// delete() <-- delete
 	
-	Optional<SiteUser> findByUsername(String usernameString);
+	// 로그인 처리하기 위해서 사용자 정보를 입력받아서 DataBase에서 Select 해서 SiteUser객체에 저장함.
+	// select * from site_user where username=?
+	Optional<SiteUser> findByUsername(String username);
 }
