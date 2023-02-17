@@ -2,6 +2,13 @@ package com.mysite.sbb.question;
 
 import com.mysite.sbb.user.SiteUser;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +18,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.mysite.sbb.DataNotFoundException;
+import com.mysite.sbb.answer.Answer;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +39,7 @@ public class QuestionService {
 	
 	// 페이징 처리
 	//Controller에서 getList메소드 호출 시 출력할 page 번호를 매개변수로 받음 : 0, 1, 2, 3
-	public Page<Question> getList(int page){
+	public Page<Question> getList(int page, String kw){
 		
 		//sort를 사용해서 번호를 정렬해서 가지고 오기
 		
@@ -41,7 +50,10 @@ public class QuestionService {
 		//Pageable 객체에 2개의 값을 담아서 매개변수로 던짐, 10 <== 출력할 레코드 수
 		Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
 		
-		return this.questionRepository.findAll(pageable);
+		//검색어를 의미하는 매개변수 kw
+		Specification<Question> spec = search(kw);
+		
+		return this.questionRepository.findAll(spec, pageable);
 	}
 
 	//상세 페이지를 처리 하는 메소드 : id를 받아서 Question 테이블을 select (findById(1)
@@ -85,4 +97,33 @@ public class QuestionService {
 		public void delete(Question question) {
 			this.questionRepository.delete(question);
 		}
+		
+	// 추천
+		public void vote(Question question, SiteUser siteUser) {
+			question.getVoter().add(siteUser);
+			this.questionRepository.save(question);
+		}
+		
+	// search
+		private Specification<Question> search(String kw){
+			return new Specification<>() {
+				private static final long serialVersionUID = 1L;
+				@Override
+				public Predicate toPredicate(Root<Question> q, CriteriaQuery<?> query, 
+						CriteriaBuilder cb) {
+					query.distinct(true);	// 중복 제거
+	
+					Join<Question, SiteUser> u1 = q.join("author",JoinType.LEFT);
+					Join<Question, Answer> a = q.join("answerList", JoinType.LEFT);
+					Join<Question, SiteUser> u2 = a.join("author", JoinType.LEFT);
+					
+					return cb.or(cb.like(q.get("subject"), "%" + kw + "%"),	// 제목
+						cb.like(q.get("content"), "%"+kw+"%"),				// 내용
+						cb.like(u1.get("username"), "%" + kw + "%"),		// 질문 작성자
+						cb.like(a.get("content"), "%"+kw+"%"),				// 답변 내용
+						cb.like(u2.get("username"), "%"+kw+"%"));			// 답변 작성자
+				}
+			};
+		}
+		
 }

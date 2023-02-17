@@ -49,6 +49,9 @@ dependencies {
 	// 라이브러리를 설치하는 순간 프로젝트의 모든 내용 접근을 인증 받아야 접근 가능하다.
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
+	
+	// 마크다운
+	implementation 'org.commonmark:commonmark:0.21.0'
 }
 
 tasks.named('test') {
