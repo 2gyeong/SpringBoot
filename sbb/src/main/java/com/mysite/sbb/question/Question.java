@@ -57,7 +57,8 @@ public class Question {
 	private LocalDateTime modifyDate;
 	
 	// 추천
-	// set -> 중복 허용 안 함.
-	@ManyToMany
+	// List : 바으이 번호(Index)를 가지고 중복된 값을 저장할 수 있다.
+	// set -> 중복 허용 안 함, 방번호를 가지지 않는다.
+	@ManyToMany		// 1. 한 명의 사용자가 여러 질문에 투표할 수 있다. 2. 하나의 질문에 여러 명의 사용자가 투표할 수 있다. 
 	Set<SiteUser> voter;
 }

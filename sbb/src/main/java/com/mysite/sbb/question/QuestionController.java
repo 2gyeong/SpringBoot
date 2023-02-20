@@ -173,6 +173,10 @@ public class QuestionController {
 			return "redirect:/question/list";
 		}
 		 
+		
+		 // id : Qeuston 객체
+		 // principal : 현재 투표하는 객체를 가지고 옴
+		 
 		// 추천
 		@PreAuthorize("isAuthenticated()")
 		@GetMapping("/question/vote/{id}")

@@ -29,23 +29,23 @@
 	</div>
 	<!-- 질문 추천, 수정, 삭제 버튼 -->
 	<div class="my-3">
-		<!-- 추천 버튼 -->
-		<a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
-                th:data-uri="@{|/question/vote/${question.id}|}">
-                추천
-                <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>
-            </a>
-		<!-- 로그인한 사용자와 글작성자가 같아야 수정버튼 노출 -->
-		<a th:href="@{|/question/modify/${question.id}|}"
-			class="btn btn-sm btn-outline-secondary"
-			sec:authorize="isAuthenticated()"
-			th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
-			th:text="수정"></a> <a href="javascript:void(0);"
-			th:data-uri="@{|/question/delete/${question.id}|}"
-			class="delete btn btn-sm btn-outline-secondary"
-			sec:authorize="isAuthenticated()"
-			th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
-			th:text="삭제"></a>
+	<!-- 추천 버튼 -->
+	<a href="javascript:void(0);" class="recommend btn btn-sm btn-outline-secondary"
+        th:data-uri="@{|/question/vote/${question.id}|}">
+        추천
+        <span class="badge rounded-pill bg-success" th:text="${#lists.size(question.voter)}"></span>
+    </a>
+	<!-- 로그인한 사용자와 글작성자가 같아야 수정버튼 노출 -->
+	<a th:href="@{|/question/modify/${question.id}|}"
+		class="btn btn-sm btn-outline-secondary"
+		sec:authorize="isAuthenticated()"
+		th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+		th:text="수정"></a> <a href="javascript:void(0);"
+		th:data-uri="@{|/question/delete/${question.id}|}"
+		class="delete btn btn-sm btn-outline-secondary"
+		sec:authorize="isAuthenticated()"
+		th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+		th:text="삭제"></a>
 	</div>
 
 	<!-- 답변의 갯수 표시 -->
@@ -53,6 +53,7 @@
 		th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
 	<!-- 답변 반복 시작 -->
 	<div class="card my-3" th:each="answer : ${question.answerList}">
+		<!--  앵커  -->
 		<a th:id="|answer_${answer.id}|"></a>
 		<div class="card-body">
 	
