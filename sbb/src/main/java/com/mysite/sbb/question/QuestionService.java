@@ -104,6 +104,8 @@ public class QuestionService {
 			this.questionRepository.save(question);
 		}
 		
+		
+		
 	// search
 		private Specification<Question> search(String kw){
 			return new Specification<>() {
@@ -125,5 +127,67 @@ public class QuestionService {
 				}
 			};
 		}
+		
+		
+		 //2월 17일 : JPA 검색 기능 추가 
+	    
+		/*  실제 SQL 쿼리 
+		 
+	select
+	    distinct q.id,
+	    q.author_id,
+	    q.content,
+	    q.create_date,
+	    q.modify_date,
+	    q.subject 
+	    
+	from question q 
+		left outer join site_user u1 
+		on q.author_id=u1.id 
+		
+	left outer join answer a 
+		on q.id=a.question_id 
+		
+	left outer join site_user u2 
+		on a.author_id=u2.id 
+		
+	where
+	    q.subject like '%스프링%' 
+	    or q.content like '%스프링%' 
+	    or u1.username like '%스프링%' 
+	    or a.content like '%스프링%' 
+	    or u2.username like '%스프링%'  
+		 
+		 
+		 */
+		
+		
+		/* JPA 메소드를 사용한 쿼리   */ 
+		
+	    private Specification<Question> search1(String kw) {
+	    	
+	        return new Specification<>() {
+	        	
+	            private static final long serialVersionUID = 1L;
+	            
+	            
+	            @Override
+	            public Predicate toPredicate(Root<Question> q, CriteriaQuery<?> query, CriteriaBuilder cb) {
+	            	
+	            	
+	                query.distinct(true);  // 중복을 제거 
+	                Join<Question, SiteUser> u1 = q.join("author", JoinType.LEFT);
+	                Join<Question, Answer> a = q.join("answerList", JoinType.LEFT);
+	                Join<Answer, SiteUser> u2 = a.join("author", JoinType.LEFT);
+	                return cb.or(cb.like(q.get("subject"), "%" + kw + "%"), // 제목 
+	                        cb.like(q.get("content"), "%" + kw + "%"),      // 내용 
+	                        cb.like(u1.get("username"), "%" + kw + "%"),    // 질문 작성자 
+	                        cb.like(a.get("content"), "%" + kw + "%"),      // 답변 내용 
+	                        cb.like(u2.get("username"), "%" + kw + "%"));   // 답변 작성자 
+	            }
+	        };
+	    }
+		
+
 		
 }

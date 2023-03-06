@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.mysite'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.3-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
@@ -37,7 +37,7 @@ dependencies {
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     
     //oracle 라이브러리 
-	implementation 'com.oracle.database.jdbc:ojdbc8'
+	implementation 'com.oracle.database.jdbc:ojdbc11'
 	
 	//JDBC
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'

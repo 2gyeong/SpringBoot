@@ -1,56 +1,424 @@
+Info.txt
 
 
-JPA 사용을 위한 환경 구성
+롬북 (lombok) - DTO : client 에서 자바의 객체(DTO) ==> DB Table 
+		      DB Table ==> DTO  ==> Client View 
+      - DTO 생성 : 
+	1. DataBase 의 테이블의 컬럼명과 동일한 자료형, 변수 (private)
+	=================================================
+	2. 기본생성자 생성 
+	3. getter(필드의 값을 가지고오는), setter(필드의 값을 셋팅) 생성
+	4. toString 재정의 : 객체 자체를 프린트했을때 객체의 필드의 내용을 확인
 
-1. H2 DataBase : 테스트 환경에서 많이 사용 ==> Oracle (서비스 환경)
-	- 라이브러리 추가 : build.gradle 
-			runtimeOnly 'com.h2database:h2' 	// 실행 시에만 작동, 테스트 환경
-	- db 연결 설정 : application.properties
-	
-		# DATABASE
-		spring.h2.console.enabled=true
+
+
+https://projectlombok.org/download
+1. 다운로드 
+2. 이클립스 가 부팅 할때 (SpringToolSuite4.ini) 파일에 lombok 가 등록 되어야 작동됨 
+	설치가 필요함 
+	다운로드한 폴더로 이동후 아래 명령어 실행 
+	java -jar lombok.jar 
+===================================================
+3. 라이브러리 추가 
+
+===============================================
+
+
+
+
+실습 : 
+   - 새로운 프로잭트 생성후 서버 포트 변경 
+   - @Controller 어너테이션 을 사용해서 @GetMapping ("/hello") 요청시 메소드 출력 @ResponseBody
+   - Lombok의 어노테이션 사용. 
+   		- @Getter, @Setter, @toString, @noArgContructor, @allArgContructor, 
+   		- @RequredArgContructor 사용 
+   - devTools 를 사용하여 수정시 자동 반영 
+
+========================================================================
+JPA 사용을 위한 환경 구성 
+1. H2 DataBase : 테스트 환경에서 많이 사용. ==> Oracle (서비스 환경) 
+    - 라이브러리 추가 : build.gradle 
+    	runtimeOnly 'com.h2database:h2'
+    - db 연결 설정 : application.properties 
+    	spring.h2.console.enabled=true
 		spring.h2.console.path=/h2-console
-		spring.datasource.url=jdbc:h2:~/local
+		spring.datasource.url=jdbc:h2:~/local	
 		spring.datasource.driverClassName=org.h2.Driver
-		spring.datasource.username=saspring.datasource.pa
-	
-	- H2 DataBase 파일을 생성 : ~ : 로그온한 계정의 홈폴더 (c:\users\hi) 
-		~/local.mv.db <== H2 데이터 베이스의 DataBase 파일
-			cd~
-			touch local.mv.db
+		spring.datasource.username=sa
+		spring.datasource.password=
+	- H2 DataBase 파일을 생성 : ~ : 로그온한 계정의 홈폴더( c:\users\hi )
+		~/local.mv.db       <== H2 데이터 베이스의 DataBase 파일 
+			cd ~ 
+			touch local.mv.db 
 			
-	- H2 DataBase 접속 : 프로젝트 시작 크롬 URL : http://localhost:9292/h2-console/ 
-
-2. JPA 환경 설정
-
-- 의존성 라이브러리 추가 : build.gradle 
-implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-# JPA ( JPA는 H2 DB와 연결 설정, 변경사항만 업데이트됨)
-spring.jpa.properties.hibernate.dialest=org.hibernate.dialect.H2Dialect
-spring.jpa.hibernate.ddl-auto=update	#주의 요함 : 운영 환경에서는 none, validate
-
-	# none : 엔티티(자바의 dto)가 변경되더라도 데이터베이스를 변경하지 않도록 설정
-	# update : 엔티티 변경된 부분만 데이터베이스에 적용됨.
-	# validate : 변경사항이 있는 지 확인만 함
-	# create : 스프링 부트가 작동될 때 DB의 테이블을 Drop하고 다시 생성 함.
-	# create-drop : create와 동일함. 스프링 부트가 종료될 때 삭제함.(drop)
+	- H2 DataBase 접속 : 프로잭트 시작  크롬 URL : http://localhost:9292/h2-console/
 	
-3. 엔티티 클래스 작성 : @Entity 어노테이션 붙은 자바 클래스
-	엔티티 : 데이터베이스 테이블과 매핑되는 자바 클래스 <== DTO의 클래스 이름이 table 명과 매핑,
-		dto의 필드명은 테이블의 컬럼명과 매핑 됨.
+2. JPA 환경 설정 	
+   
+   - 의존성 라이브러리 추가 : build.gradle 	
+   		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+   - JPA 설정 : application.properties
+   		# JPA( JPA는 H2 DB와 연결 설정, 변경사항만 업데이트됨 ) 
+		spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+		spring.jpa.hibernate.ddl-auto=update	# 주의 요함 : 운영환경에서는 none, validate
+			# none : 엔티티(자바의 dto)가 변경되더라도 데이터베이스를 변경하지 않도록 설정
+			# update : 엔티티 변경된 부분만 데이타베이스에 적용됨
+			# validate : 변경사항이 있는지 확인만 함
+			# create : 스프링 부트가 작동될때 DB의 테이블을 Drop 하고 다시 생성 함. 
+			# create-drop : create와 동일함. 스프링 부트가 종료될때 테이블을 삭제함. (drop) 
+
+2. 엔티티 클래스 작성 : @Entity 어노테이션이 붙은 자바 클래스 
+	엔티티 : 데이타베이스 테이블과 매핑되는 자바 클래스 <== DTO 의 클래스 이름이 테이블명과 매핑 , 
+		dto의 필드명은 테이블의 컬럼명과 매핑된 	
 		
-	-- Question.java
-	-- Answer.java
+		-- Question.java	: 부모
+		-- Answer.java		: 자식  
+		
+JPA는 DB의 테이블 컬럼이 수정, 생성, 삭제 가 빈번하게 발생시 유지 보수를 아주 쉽게 할 수 있다. 
+   - JPA를 사용하지 않는경우  DB의 테이블이 수정이발생시 dto, dao (insert, update, delete, get, getList)			
+   - 단점 : 테이블이 복잡한 조인으로 연결된 경우나, 복잡한 계산을 처리하는 환경에서는 적합하지 않다. 
+                 ( MyBatis : 유지 보수도 쉽게 하고, 복잡한 계산처리도 가능 ) 			
 
-JPA는 DB의 데이터 컬럼이 수정, 생성, 삭제가 빈번하게 발생 시 유지 보수를 아주 쉽게 할 수 있다.
-- JPA를 사용하지 않는 경우 DB의 테이블이 수정이 발생 시 dto, dao (insert, update, delete, get, getList)
-- 단점 : 테이블이 복잡한 조인으로 연결된 경우나, 복잡한 계산을 처리하는 환경에서는 적합하지 않다.
-		( MyBatis : 유지 보수도 쉽게 하고, 복잡한 계산처리도 가능 )
+3. 레포지토리(Repository) 클래스  :  DAO : 자바 클래스의 JPA 메소드를 사용해서 
+		SQL의 CRUD ( Insert, Select, Update, delete) 
+    - JPA를 사용해서 DB를 CRUD 할려면 Repository 인터페이스를 생성해야 한다. 
+    - JpaRepository 를 상속해서 만들어야 한다. 
+    
+ 
+ 
+ 실습 : sbb2 프로잭트에서 진행하세요. H2 DataBase를 사용 하세요.  
+     JPA Entity 클래스 실습, JPA 메소드를 사용해서 CRUD , save(), findAll(), 
+ 
+ 아래 내용의 JPA Entity 클래스를 생성 하세요. 
+ 테이블명 : users							<== user 는 예약어 
+      idx   primary key, 자동증가(1,1) 
+      name  varchar(100) 
+      pass  varchar(100) 
+      email varchar(200) 
+      regdate LoacalDateTime 
+      cnt	int 
+      
+ --임의의  값을 5개 insert 
+ --넣은 값을 regdate 컬럼을 기준으로 내림차순( Desc ) 정렬 
+ -- idx 3 번의 name 과 email 주소를 수정 
+ -- idx 4 번의 값을 삭제 
+ 
+ sbb2프로잭트 폴더 압축 : 조명_이름.zip 
+ 업로드 URL : https://url.kr/u86s1c
+      
+====================================================
+Transaction (트랜잭션) : 일(작업) 을 처리하는 최소단위
+   - 트랜잭션이 시작되면 트랜잭션 완료까지 Lock 이 걸림.  
+   - 트랜잭션이 발생되면 SQL Log 에 모두 기록이됨. 
+   - DML 문에서 트랜 잭션이 발생 , ( Insert, Update, Delete )
+   - 트랜잭션이 발생되고 commit 되지 전까지는 RAM에만 적용 
+   - rollback ( 트랜잭션 발생시점으로 되돌림), 
+   - commit ( DB 영구적으로 적용)  ;  
+   - Oracle  Insert, Update, Delete 구문이 발생되면 자동으로 트랜잭션 시작
+	commit ; 
+   - MSSQL, MySQL  : 자동 커밋 트랜잭션  (Statement, preparedStatement)
+   - 백업 시점이 아니라 오류가 발생된 시점으로 되돌릴 수 있다. 
+   - All or Nothing :  되면 전부 완료 되게 하거나 아니면 원점으로 되돌려 줘야한다.   
+ ========================================================
+ 
+ <실습> 
+ 프로잭트 : sbb2  
+   -users 테이블에 저장된 레코드를 View Page 에서 출력 
+   
+   usersRepository 를 Controller에서 생성자 주입 
+   
+   client 요청 : http://localhost:0000/user_list
+   view page : users_list.html 
+ 
+ 
+ 
+   sbb2프로잭트 폴더 압축 : 조명_이름.zip 
+   업로드 URL : https://url.kr/u86s1c
+ 
+ 
+ 
+ 
+ 
+ ==============================================
+ Service 클래스 : 비즈니스 로직을 처리함. 
+     - 규모가 큰 사이트에서 비즈로직을 간략하게 처리 할 수 있다. 
+     - 유지 보수가 빈번한 경우 유지 보수를 쉽게 구현 할 수 있다. 
+     - 보안을 강화 할 수 있다. 
+   
+ Client ==> Controller ==> Service (비즈니스 로직처리, dto, DAO )  ==> DAO => DB 
+ 
+ 
+ 
+ 
+
+
+ 
+ 2월 10일 
+ <실습> sbb2 	    :   <Controller>   <Service>   <Repository> 
+  테이블명 : users							<== user 는 예약어 
+      idx   primary key, 자동증가(1,1) 
+      name  varchar(100) 
+      pass  varchar(100) 
+      email varchar(200) 
+      regdate LoacalDateTime 
+      cnt	int 
+      
+ users테이블에  : 1000 개의 더미값 입력 
+    name : "이름 - "  + 숫자
+    pass : "pass1"
+    email : "메일주소 - " + 숫자
+    regdate : 현재 날짜 
+    cnt : 번호 
+ 
+ client 요청 : http://localhost:0000/user_detail/1
+   view page : users_detail.html 
+ 
+   view page : user_insert.html 
+   http://localhost:0000/user_insert 
+ 
+   sbb2프로잭트 폴더 압축 : 조명_이름.zip 
+   업로드 URL : https://url.kr/u86s1c  
+ 
+ 
+ 
+ // Spring Framework를 사용한 폼 태그 내의 유효성 검사 
+ 
+ 1. 라이브러리 등록 : 
+     build.gradle 에 등록 
+     	    //Spring 에서 제공해주는 유효성 검사 라이브러리 : form에서 빈값이나 글자수 제한 
+    		implementation 'org.springframework.boot:spring-boot-starter-validation'
+ 
+ 2. 유효성 검사 클래스를 생성 ( QuestionForm.java ) , @NotEmpty (message="오류메세지") 
+ 	@Getter 
+ 	@Setter 
+ 	
+ 	유효성 검사 필드 : subject, content 
+ 
+ 
+ 
+ 부트스트랩 - FrontEnd 를 쉽게 사용할 수 있도록 , CSS, JS를 제공함. 
+	-- FrontEnd 디자인을 잘몰라도 css의 ID , Class호출 만으로 쉽게 깔끔한 사이트를 만들 수 있음. 
+	-- 반응형이 기본적으로 구현되어 있음. 
+https://getbootstrap.com/docs/5.2/getting-started/download/
+ 
+ 
+ 
+ STS에서 포트가 충돌나서 실행이 안되는 경우 
+ 1. 관리자 권한의 명령프롬프트로 실행 
+ 2. netstat -nao      : 열려있는 포트의 PID 확인 ( PID : 프로세스(메모리의 로드된 프로그램)의 고유번호 ) 
+ 3. taskkill /f /pid 14420 
+ 
+ 
+ 페이징 처리 : 스프링에서는 JPA에서 제공해주는 객체를 사용 
+   - 스프링에서는 페이징을 처리하기 위한 별도의 라이브러리가 필요없다. 
+   - 기본적으로 JPA 페이징 처리를 위한 객체가 존재한다. 
+   - Page 
+   - PageRequest
+   - Pageable 
+   
+   
+   
+   
+   
+ 2월 14일 실습 
+ 
+  <실습> sbb2 	    :   <Controller>   <Service>   <Repository> 
+  테이블명 : users							<== user 는 예약어 
+      idx   primary key, 자동증가(1,1) 
+      name  varchar(100) 
+      pass  varchar(100) 
+      email varchar(200) 
+      regdate LoacalDateTime 
+      cnt	int 
+      
+      1. 부트스트랩 import 
+      2. layout.html <== 공통으로 적용되는 부분을 뽑아내서 처리, list.html , detail.html, input.html 
+      3. 상단의 NavBar 를 생성 , 부트스트랩의 자바스크립트 처리 
+      4. list.html 에 페이징 처리(10개 레코드) , 날짜를 기준으로 desc, 번호를 처리 출력 
+      5. 유효성 체크 : name , pass, emial 에 갑을 넣지 않을 경우 오류메세지 출력, 값을 모두 넣었을때 등록 
+       
+   sbb2프로잭트 폴더 압축 : 조명_이름.zip 
+   업로드 URL : https://url.kr/u86s1c 
+ 
+ 
+ 
+ 
+ 
+ 2월 15일 (수)
+ 3장 SBB 서비스 개발.pdf  ( 15:30분까지 )
+ 
+ Page 28 ~ 55 까지 
+ 3-04 답변 개수 표시
+ 3-05 스프링 시큐리티
+ 3-06 회원가입
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  2월 16일 (목)
+ 3장 SBB 서비스 개발.pdf  ( 15:30분까지 )
+ 
+ Page 55 ~ 117 Page 
+ 3-07 로그인과 로그아웃
+ 3-08 엔티티 변경
+ 3-09 글쓴이 표시
+ 3-10 수정과 삭제
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 2월 17일 (금)
+ 3장 SBB 서비스 개발.pdf  ( 15:30분까지 )
+ 
+ Page 117 ~ 158 Page 
+ 3-11 추천
+ 3-12 앵커
+ 3-13 마크다운
+ 3-14 검색
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /* 검색 기능 사용시 사용할 SQL 쿼리 예제 */
+ 
+ select
+    distinct q.id,
+    q.author_id,
+    q.content,
+    q.create_date,
+    q.modify_date,
+    q.subject 
+    
+from question q 
+	left outer join site_user u1 
+	on q.author_id=u1.id 
 	
-4. 레파지토리(Repository) : DAO : 자바클래스의 메소드를 사용해서 
-		  SQL의 CRUD( Insert, Select, Update, Delete)
-	- JPA를 사용해서 DB를 CRUD하려면 Repository 인터페이스를 생성해야 한다.
-	- JpaRepository 를 상속해서 만들어야 한다.
+left outer join answer a 
+	on q.id=a.question_id 
 	
+left outer join site_user u2 
+	on a.author_id=u2.id 
 	
+where
+    q.subject like '%스프링%' 
+    or q.content like '%스프링%' 
+    or u1.username like '%스프링%' 
+    or a.content like '%스프링%' 
+    or u2.username like '%스프링%' 
+    
+  
+  ==================================================================================  
+ 검색 기능 : Join 
+ -- answer 테이블과 site_user 테이블을 Inner Join 에서 content 컬럼의 값이 '스프링' 이 적용된 
+select * from answer  a
+ join site_user s 
+    on a.author_id = s.id 
+where content like '%스프링%' 
+
+
+-- 하나의 검색 변수 값으로 여러 테이블의 컬럼을 검색함. (JOIN) 
+
+select 
+    distinct q.id,  
+    q.author_id, 
+    q.content, 
+    q.subject, 
+    q.mody_date 
+    q.create_date 
+
+from question q 
+    left outer Join site_user u1 
+       on q.author_id = u1.id 
+   
+    left outer join answer a 
+       on q.id = a.question_id 
+    left outer join site_user u2
+       on a.author_id = u2.id 
+
+where 
+    q.subject like '%스프링%'
+    or q.content like '%스프링%'
+    or a.content like '%스프링%'
+    or u1.username like '%스프링%'	-- question author_id 
+    or u2.username like '%스프링%'	--  ansewer quthor_id 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

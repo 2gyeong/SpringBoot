@@ -24,7 +24,8 @@ public class Answer {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;		//Primary Key, 자동 증가됨.(1,1)
 	
-	@Column(columnDefinition = "TEXT")
+//	@Column(columnDefinition = "TEXT")
+	@Column(length = 4000)
 	private String content;
 	
 	private LocalDateTime createDate;
@@ -41,4 +42,5 @@ public class Answer {
 	// 추천
 	@ManyToMany
 	Set<SiteUser> voter;
+	
 }
