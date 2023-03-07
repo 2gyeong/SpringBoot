@@ -23,6 +23,8 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	
 	//lombok 라이브러리 등록
 	compileOnly 'org.projectlombok:lombok'		// 컴파일 단계에서만 필요한 경우에 사용됨
@@ -39,6 +41,10 @@ dependencies {
 	// 처리해 주는 라이브러리
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
     
 }
 

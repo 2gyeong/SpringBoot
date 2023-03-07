@@ -3,7 +3,6 @@ package com.mysite.board;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.repository.Modifying;
 
 import com.mysite.member.Member;
 
@@ -12,9 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,13 +21,12 @@ import lombok.Setter;
 public class Board {
 
 	@Id
+	@Column(name="board_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int boardId;
+	private Integer id;
 	
-	@Column(columnDefinition = "TEXT")
 	private String subject;
 	
-	@Column(columnDefinition = "TEXT")
 	private String content;
 	
 	@CreatedDate
@@ -39,7 +35,6 @@ public class Board {
 	
 	private LocalDateTime modifyDate;
 	
-	
 	@ManyToOne
-	private Member member;
+	private Member author;
 }
