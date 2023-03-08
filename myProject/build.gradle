@@ -26,13 +26,9 @@ dependencies {
 	// development : 실제 서비스로 빌드 할 때는 빌드되지 않도록 설정, 개발 시에만 필요
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
-	//lombok 라이브러리 등록
-	compileOnly 'org.projectlombok:lombok'		// 컴파일 단계에서만 필요한 경우에 사용됨
-	annotationProcessor 'org.projectlombok:lombok'	// 컴파일 단계어서 어노테이션을 분석 처리함
-	implementation 'org.projectlombok:lombok'
-	
-	// H2 라이브러리
-	runtimeOnly 'com.h2database:h2' 	// 실행 시에만 작동, 테스트 환경
+	//lombok 라이브러리 
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	
 	// JPA 라이브러리
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -44,6 +40,14 @@ dependencies {
     // 타임리프 - Bootstrap
     implementation 'org.webjars:webjars-locator:0.45'
 	implementation 'org.webjars:bootstrap:5.1.3'
+	
+		
+//javax 패키지의 라이브러리를 사용 : spring boot 2.3 이상에서 사용 설정 
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.4'  
+
+	//modelmapper 라이브러리 
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+	
 	
     
     //oracle 라이브러리 
@@ -57,8 +61,8 @@ dependencies {
 	
 	// 스프링 시큐리티
 	// 라이브러리를 설치하는 순간 프로젝트의 모든 내용 접근을 인증 받아야 접근 가능하다.
-//	implementation 'org.springframework.boot:spring-boot-starter-security'
-//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
 	
 	// 마크다운
 	implementation 'org.commonmark:commonmark:0.21.0'
