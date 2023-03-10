@@ -1,6 +1,6 @@
 package com.washour.www.member;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -10,15 +10,15 @@ import lombok.RequiredArgsConstructor;
 public class MemberService {
 
 	private final MemberRepository memberRepository;
+	private final PasswordEncoder passwordEncoder;
 	
-	public Member signUp(String id, String email, String password) {
+	public Member signUp(String memberId, String username, String email, String password) {
 		Member m = new Member();
-		m.setId(id);
+		m.setMemberId(memberId);
+		m.setUsername(username);
 		m.setEmail(email);
-		
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		
 		m.setPassword(passwordEncoder.encode(password));
+		m.setAddress(password);
 		
 		this.memberRepository.save(m);
 		return m;

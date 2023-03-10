@@ -1,13 +1,13 @@
 package com.washour.www.member;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +24,7 @@ public class Member {
 	    private Long idx;
 		
 		@Column(unique = true)
-		private String id;
+		private String memberId;
 
 	    private String username;
 
