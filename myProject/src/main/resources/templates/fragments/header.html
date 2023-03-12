@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <header th:fragment="headerFragment">
 
         <div class ="topmenu">
             <ul>
-                <a th:href="@{/member/login}"><li>로그인</li></a>
+            	
+                <li><a sec:authorize="isAnonymous()" th:href="@{/member/login}" >로그인</a>
+                 <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}" >로그아웃 </a>
+                </li>
+               
                 <li>|</li>
                 <a th:href="@{/member/sign_up}"><li>회원가입</li></a>
                 <li>|</li>
                 <li>장바구니</li>
             </ul>
+            <div><span sec:authentication="name"></span>님 환영합니다!</div>
+
+
         </div>
         <div class="clear"></div>
         <div id ="logo">
@@ -42,4 +51,5 @@
         </nav>
 </header>
 </html>
+
         

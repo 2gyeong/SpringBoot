@@ -33,7 +33,7 @@ public class UserSecurityService implements UserDetailsService {
 		
 		// Authentication (인증) : Identity(ID) + Password를 확인 하는 것
 		// Authorization (허가) : 인증된 사용자에게 사이트를 쓸 수 있도록 권한을 부여하는 것
-		List<GrantedAuthority> authorities = new ArrayList();
+		List<GrantedAuthority> authorities = new ArrayList<>();
 		
 		if("admin".equals(username)) {
 			

@@ -27,13 +27,19 @@ public class SecurityConfig {
 	 		.addHeaderWriter(new XFrameOptionsHeaderWriter(
 			 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
 		 
+	 		// 로그인
 	 		.and()
 	 		 .formLogin()
 	 		 .loginPage("/member/login")
 	 		 .defaultSuccessUrl("/")
-	 		 ;
-	 		
-	 		;
+	 		 
+	 		// 로그아웃
+			.and()
+            .logout()
+            .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
+            .logoutSuccessUrl("/")
+            .invalidateHttpSession(true)		// 세션 초기화
+        ;
 			
 	 			return http.build();
 	 }

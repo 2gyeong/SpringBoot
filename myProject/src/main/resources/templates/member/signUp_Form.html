@@ -55,11 +55,12 @@
  
     <div class="container">
  <form role="form" th:action="@{/member/sign_up}" th:object="${signUpForm}" method="post">
- <div class="mb-3">
- <label for="id" class="form-label">사용자 ID</label>
- <input type="text" th:field="*{memberId}" class="form-control" placeholder="사용자 ID를 입력하세요"
- th:class="${#fields.hasErrors('memberId')}? 'form-control  fieldError' : 'form-control'">
- <p th:if="${#fields.hasErrors('memberId')}" th:errorclass="error" th:errors="*{memberId}" />
+ <div th:replace="~{/member/form_errors :: formErrorsFragment}"></div>
+  <div class="mb-3">
+ <label for="username" class="form-label">아이디</label>
+ <input type="text" th:field="*{username}" class="form-control"
+ th:class="${#fields.hasErrors('username')}? 'form-control  fieldError' : 'form-control'">
+ <p th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}" />
  </div>
  
  <div class="mb-3">
@@ -74,26 +75,19 @@
  th:class="${#fields.hasErrors('password2')}? 'form-control  fieldError' : 'form-control'">
  <p th:if="${#fields.hasErrors('password2')}" th:errorclass="error" th:errors="*{password2}" />
  </div>
-  <div class="mb-3">
- <label for="username" class="form-label">이름</label>
- <input type="text" th:field="*{userName}" class="form-control"
- th:class="${#fields.hasErrors('userName')}? 'form-control  fieldError' : 'form-control'">
- <p th:if="${#fields.hasErrors('userName')}" th:errorclass="error" th:errors="*{userName}" />
- </div>
+
  <div class="mb-3">
  <label for="email" class="form-label">이메일</label>
  <input type="email" th:field="*{email}" class="form-control"
  th:class="${#fields.hasErrors('email')}? 'form-control  fieldError' : 'form-control'">
  <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" />
  </div>
-  <div class="mb-3">
+ <div class="mb-3">
  <label for="address" class="form-label">주소</label>
  <input type="text" th:field="*{address}" class="form-control"
- th:class="${#fields.hasErrors('address')}? 'form-control  fieldError' : 'form-control'"
- th:if="${#fields.hasErrors('address')}" th:>
+ th:class="${#fields.hasErrors('address')}? 'form-control  fieldError' : 'form-control'">
  <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}" />
  </div>
- 
  
   <button type="submit" class="btn btn-primary">등록</button>
  </form>

@@ -19,13 +19,11 @@ import lombok.Setter;
 @Table(name="member")
 public class Member {
 		@Id
-	    @Column(name="member_idx")
+	    @Column(name="member_id")
 	    @GeneratedValue(strategy = GenerationType.AUTO)
-	    private Long idx;
+	    private Long id;
 		
 		@Column(unique = true)
-		private String memberId;
-
 	    private String username;
 
 	    @Column(unique = true)
