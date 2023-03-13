@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>02_post 요청하기</title>
+<script
+  src="https://code.jquery.com/jquery-3.6.4.js"></script>
+</head>
+<body>
+
+	<h1>02_get 요청하기</h1>
+	<button onclick="ex02Fn()"> ex02 함수 호출하기 </button>
+</body>
+
+<script type="text/javascript">
+	const ex02Fn = () => {
+	//	console.log("함수 호출 성공")
+	
+		$.ajax({		// ajax 구문 블락
+			
+			// 요청 방식 : get / post
+			// 요청 주소 : /ex02 		<== Controller 로 보내는 요청 주소
+			type : "post", 
+			url : "/ex02",
+			
+			// 요청이 성공했을 때 실행되는 부분
+			success : function(res){
+				console.log("성공", res)
+			},
+			
+			// 요청이 실패 했을 때 실행되는 블락 ( 예외 처리 )
+			error : function(){
+				console.log("실패")
+			}
+		})
+		
+	}
+
+</script>
+</html>

@@ -20,17 +20,27 @@ repositories {
 
 dependencies {
 
+	
+
     
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	//lombok 라이브러리 
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	
+	// 스프링 시큐리티
+	// 라이브러리를 설치하는 순간 프로젝트의 모든 내용 접근을 인증 받아야 접근 가능하다.
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	
 	
 	// devtool : 수정 변경 시 자동으로 톰캣을 restart (중지 -> 시작 ) : 자동으로 컴파일
 	// development : 실제 서비스로 빌드 할 때는 빌드되지 않도록 설정, 개발 시에만 필요
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
-	//lombok 라이브러리 
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+
 	
 	// H2 라이브러리
 	runtimeOnly 'com.h2database:h2' 	// 실행 시에만 작동, 테스트 환경
@@ -65,11 +75,7 @@ dependencies {
 	// Spring 에서 제공해주는 유효성 검사 라이브러리 : form에서 빈값이나 글자 수 제한
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	
-	// 스프링 시큐리티
-	// 라이브러리를 설치하는 순간 프로젝트의 모든 내용 접근을 인증 받아야 접근 가능하다.
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
-	
+
 	// 마크다운
 	implementation 'org.commonmark:commonmark:0.21.0'
 }

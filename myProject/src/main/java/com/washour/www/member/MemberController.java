@@ -41,7 +41,7 @@ public class MemberController {
 			bindingResult.rejectValue("password2", "passwordInCorrect", 
 					"패스워드가 일치하지 않습니다.");
 			
-			return "member/signup_Form";
+			return "member/signUp_Form";
 		}
 		
 		try {
@@ -50,7 +50,7 @@ public class MemberController {
 		} catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
 			bindingResult.reject("signupFailed", "이미 사용중인 ID입니다.");
-			return "member/signup_Form";
+			return "member/signUp_Form";
 			
 		} catch(Exception e) {
 			e.printStackTrace();

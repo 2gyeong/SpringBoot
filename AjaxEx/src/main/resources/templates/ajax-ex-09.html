@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>09_post 요청하기 & parameter 전달하기 & ResponseEntity에 DTO 객체 리턴하기</title>
+<script
+  src="https://code.jquery.com/jquery-3.6.4.js"></script>
+</head>
+<body>
+
+	<h1>09_post 요청하기 & parameter 전달하기 & ResponseEntity에 DTO 객체 리턴하기</h1>
+	<button onclick="ex09Fn()"> ex09 함수 호출하기 </button>
+</body>
+
+<script type="text/javascript">
+	const ex09Fn = () => {
+	//	console.log("함수 호출 성공")
+		const val1 = "Hello Spring Boot!!";
+	
+		const params = {
+				
+				"param1" : val1,
+				"param2" : "안녕"
+				
+		}
+	
+		$.ajax({		// ajax 구문 블락
+			
+			// 요청 방식 : get / post
+			// 요청 주소 : /ex09 		<== Controller 로 보내는 요청 주소
+			type : "post", 
+			url : "/ex09", 
+			
+			// parameter 값을 서버로 전송할때, JavaScript 객체로 전송하는 것이 아니라 JSON 형식으로 전송했을때는
+			
+			// JSON -> @RequestBody
+			// 서버에서 @RequestBody 어노테이션으로 받아야 한다.
+			// data를 서버로 전송할 때 JSON 형식이라고 선언 후 전송
+			data:JSON.stringify(params),			// 변수를 서버로 전송 시 JSON선언 후 전송
+			contentType:"application/json",
+			
+			// 요청이 성공했을 때 실행되는 부분
+			success : function(res){		// res <== 전체 List 출력
+				console.log("성공", res)
+				
+			},
+			
+			// 요청이 실패 했을 때 실행되는 블락 ( 예외 처리 )
+			error : function(){
+				console.log("실패")
+			}
+		})
+		
+	}
+
+</script>
+</html>
