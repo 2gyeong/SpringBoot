@@ -42,6 +42,8 @@
 		data:JSON.stringify(params),			// 변수를 서버로 전송 시 JSON선언 후 전송
 		contentType:"application/json",
 		success : function(result){
+			
+			//$(선택자).동작함수();
 			$("#result").html(result);
 			console.log("성공")
 		}
