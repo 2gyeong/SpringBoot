@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ajax.dto.AjaxDTO;
+import com.ajax.dto.AjaxLabDTO;
 
 @Controller
 public class AjaxController {
@@ -146,6 +147,22 @@ public class AjaxController {
 	dtoList.add(new AjaxDTO("data11", "data22"));	// index2
 	
 	return new ResponseEntity<>(dtoList, HttpStatus.OK);	
+	}
+	
+	@PostMapping("/ajax-lab")	
+	public @ResponseBody int plus(@RequestBody AjaxLabDTO ajaxLabDTO) {
+		
+		System.out.println("result :" +  ajaxLabDTO);
+		
+		int a1 = ajaxLabDTO.getAa();
+		
+		int b1 = ajaxLabDTO.getBb();
+		
+		int result = a1 + b1;
+		
+		System.out.println("result :" +  result);
+		
+		return result;	
 	}
 
 }

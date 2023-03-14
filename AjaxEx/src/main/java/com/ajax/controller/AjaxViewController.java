@@ -71,4 +71,10 @@ public class AjaxViewController {
 		System.out.println("AjaxController ex10 요청 성공");
 		return "ajax-ex-10";	
 	}
+	
+	@GetMapping("/ajax-lab")
+	public String ajaxlab() {
+		
+		return "ajax-lab";	
+	}
 }

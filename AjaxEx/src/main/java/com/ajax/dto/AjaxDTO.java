@@ -11,4 +11,8 @@ public class AjaxDTO {
 
 	private String param1;
 	private String param2;
+	
+
 }
+
+

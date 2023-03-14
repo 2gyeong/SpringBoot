@@ -1,5 +1,7 @@
 package com.washour.www.member;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.washour.www.DataNotFoundException;
+
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -17,14 +21,15 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	
 	private final MemberService memberService;
+	
+	private final MemberRepository memberRepository;
+	
 
 	@GetMapping(value = "/login")
 	public String login() {
 		
 		return "member/login";
 	}
-	
-	
 	
 	@GetMapping("/sign_up")
 	public String signUp (SignUpForm signUpForm) {
@@ -63,4 +68,6 @@ public class MemberController {
 		return "redirect:/member/login";
 			
 	}
+	
+
 }
