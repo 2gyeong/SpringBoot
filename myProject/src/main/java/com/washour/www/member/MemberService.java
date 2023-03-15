@@ -35,4 +35,6 @@ public class MemberService {
 	            throw new DataNotFoundException("siteuser not found");
 	        }
 	}
+	
+
 }

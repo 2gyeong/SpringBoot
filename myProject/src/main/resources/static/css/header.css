@@ -8,15 +8,42 @@ a:visited{color: #222222;}
 ul, li, ol {list-style-type: none; }
 .topmenu {
     float: right;
-    width: 15%;
-    min-width: 230px;
-    margin-right: 50px ;
-    margin-top: 20px;
+    width: 25%;
+    min-width: 280px;
+    margin-right: 2% ;
+    margin-top: 2%;
 }
+
 .topmenu li {
     font-size: 10pt;
     font-weight: 200;
-    color: #7e7d7d; float :left; margin-left: 15px;}
+    color: #7e7d7d;
+    margin-left: 15px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.topmenu li a {
+    font-size: 10pt;
+    font-weight: 200;
+    color: #7e7d7d; 
+    margin-left: 15px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+   
+}
+
+.name {
+    color: rgb(0, 153, 255); 
+}
+
 
 #logo {
     width: 100%;
@@ -33,6 +60,7 @@ ul, li, ol {list-style-type: none; }
 }
 .menu {
     height: 30px;
+    z-index: 1;
     }
 .main {
     width: 100%; 

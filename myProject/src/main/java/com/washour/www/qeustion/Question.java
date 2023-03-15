@@ -36,11 +36,13 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(length = 200)
-    private String subject;
-
-    @Column(columnDefinition = "TEXT")
-    private String content;
+	@Column(length = 200)	// 200자 까지 
+	private String subject;
+	
+	
+	//@Column(columnDefinition = "TEXT")
+	@Column(length = 4000)
+	private String content;
 
     @CreatedDate
     private LocalDateTime createDate;

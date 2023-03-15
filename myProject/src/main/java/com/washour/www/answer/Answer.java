@@ -30,7 +30,8 @@ public class Answer {
 	    @GeneratedValue(strategy = GenerationType.AUTO)
 	    private Integer id;
 
-	    @Column(columnDefinition = "TEXT")
+//		@Column(columnDefinition = "TEXT")
+		@Column(length = 4000)
 	    private String content;
 
 	    private LocalDateTime createDate;

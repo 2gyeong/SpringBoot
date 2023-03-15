@@ -1,17 +1,18 @@
 package com.washour.www.member;
 
-import java.util.Optional;
+
+import java.security.Principal;
 
 import javax.validation.Valid;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.washour.www.DataNotFoundException;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 
@@ -68,6 +69,16 @@ public class MemberController {
 		return "redirect:/member/login";
 			
 	}
+	
+	@GetMapping("/myinfo")
+	public String myinfo(Principal principal, ModelMap modelMap) {
+		String loginId = principal.getName();
+		Member member = memberService.getMember(loginId);
+		modelMap.addAttribute("member", member);
+		
+		return "myinfo";
+	}
+	
 	
 
 }
