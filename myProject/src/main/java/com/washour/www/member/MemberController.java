@@ -51,7 +51,7 @@ public class MemberController {
 		}
 		
 		try {
-			memberService.signUp(signUpForm.getUsername(), 
+			memberService.signUp(signUpForm.getUsername(),
 				signUpForm.getEmail(), signUpForm.getPassword1(), signUpForm.getAddress());
 		} catch(DataIntegrityViolationException e) {
 			e.printStackTrace();
@@ -76,7 +76,7 @@ public class MemberController {
 		Member member = memberService.getMember(loginId);
 		modelMap.addAttribute("member", member);
 		
-		return "myinfo";
+		return "/member/myinfo";
 	}
 	
 	

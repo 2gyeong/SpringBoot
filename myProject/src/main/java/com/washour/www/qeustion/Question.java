@@ -53,8 +53,11 @@ public class Question {
     @ManyToOne
     private Member author;
     
+    // 수정일시 저장
     private LocalDateTime modifyDate;
     
+    // 추천 버튼
+    // set 컬렉션 : 중복 저장 X , List와 달리 순서보장 X
     @ManyToMany
     Set<Member> voter;
 }

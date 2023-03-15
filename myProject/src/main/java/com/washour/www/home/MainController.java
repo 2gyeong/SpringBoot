@@ -14,19 +14,25 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MainController {
 	
+	@GetMapping("/")
+	public String index() {
 
+		
+		return "index"; 
+	}
+/*
 	@GetMapping("/")
 	public String index(Model model, @AuthenticationPrincipal Member member) {
 
 		if(member == null) {
-			model.addAttribute("message", "gg");
+			model.addAttribute("message", "로그인 정보 없음");
 		} else {
-			model.addAttribute("message", "ff" + member.getUsername() + member.getEmail() + member.getAddress());
+			model.addAttribute("message", "로그인 정보" + member.getUsername() + member.getEmail() + member.getAddress());
 		}
 		return "index"; 
 	}
 	
-
+*/
 	@GetMapping("/category_1")
 	public String category() {
 		

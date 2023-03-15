@@ -6,7 +6,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
         <div class ="topmenu">
             
-            <div class="welcome" sec:authorize="isAuthenticated()" ><span class="name" sec:authentication="name"></span>님 환영합니다!</div>
+            <div class="welcome" sec:authorize="isAuthenticated()" ><span class="name"  sec:authentication="name"></span>님 환영합니다!</div>
             <ul>
                 <li>
                 	<a sec:authorize="isAnonymous()" th:href="@{/member/login}" >로그인</a>
