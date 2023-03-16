@@ -21,10 +21,25 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	//JDBC
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	
+	//H2 라이브러리 
+	runtimeOnly 'com.h2database:h2'			//실행시에만 작동 , 테스트 환경
+	//JPA 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	
+	//javax 패키지의 라이브러리를 사용 : spring boot 2.3 이상에서 사용 설정 
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.4' 
+
+	//modelmapper 라이브러리 
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+	
+	
 }
 
 tasks.named('test') {

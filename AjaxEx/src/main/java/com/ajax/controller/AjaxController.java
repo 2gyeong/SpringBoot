@@ -15,9 +15,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ajax.dto.AjaxDTO;
 import com.ajax.dto.AjaxLabDTO;
+import com.ajax.dto.MovieDTO;
+import com.ajax.service.MovieService;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class AjaxController {
+	
+	private final MovieService movieService ;
 	
 	@GetMapping("/ex01")
 	public String ex01 () {
@@ -163,6 +170,21 @@ public class AjaxController {
 		System.out.println("result :" +  result);
 		
 		return result;	
+	}
+	
+	
+	
+	@PostMapping("/movie/put") 
+	public @ResponseBody String lab2(@RequestBody MovieDTO movieDTO) {
+		System.out.println("AjaxController ex07 요청 성공");
+		System.out.println("ajaxDTO : " + movieDTO);
+
+//BackEnd DB의 로직을 처리후 DB의 레코드 하나를 DTO 객체에 저장후 리턴 
+
+		
+		String str = movieService.movieInsert(movieDTO); 
+		
+		return str;
 	}
 
 }

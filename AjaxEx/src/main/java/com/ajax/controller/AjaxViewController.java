@@ -77,4 +77,10 @@ public class AjaxViewController {
 		
 		return "ajax-lab";	
 	}
+	
+	@GetMapping("/ajax-lab2")
+	public String ajaxlab2() {
+		
+		return "Ajax-lab2";	
+	}
 }
